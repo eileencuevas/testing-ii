@@ -9,7 +9,7 @@ class Display extends React.Component {
     }
 
     wasStrike = () => {
-        if (this.state.strikes <= 2) {
+        if (this.state.strikes < 2) {
             this.setState({ strikes: this.state.strikes + 1 });
         } else {
             this.setState({ balls: 0, strikes: 0 });
