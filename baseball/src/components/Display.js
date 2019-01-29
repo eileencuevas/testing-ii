@@ -17,7 +17,7 @@ class Display extends React.Component {
     }
 
     wasBall = () => {
-        if (this.state.balls <= 3) {
+        if (this.state.balls < 3) {
             this.setState({ balls: this.state.balls + 1 });
         } else {
             this.setState({ balls: 0, strikes: 0 });
