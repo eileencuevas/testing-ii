@@ -92,4 +92,16 @@ describe('Display Tests', () => {
 
         expect(balls).toHaveTextContent(0);
     })
+
+    it('should have ball count and strikes reset when hit button is pressed', () => {
+        const { getByTestId } = render(<Display />);
+        const balls = getByTestId('ball-count');
+        const strikes = getByTestId('strike-count');
+        const hitBtn = getByTestId('hit-btn');
+
+        fireEvent.click(hitBtn);
+
+        expect(balls).toHaveTextContent(0);
+        expect(strikes).toHaveTextContent(0);
+    })
 })
