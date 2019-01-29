@@ -69,4 +69,27 @@ describe('Display Tests', () => {
         expect(strikes).toHaveTextContent(2);
 
     })
+
+    it('should have ball count incremented when ball button is pressed', () => {
+        const { getByTestId } = render(<Display />);
+        const balls = getByTestId('ball-count');
+        const ballBtn = getByTestId('ball-btn');
+
+        fireEvent.click(ballBtn);
+
+        expect(balls).toHaveTextContent(1);
+    })
+
+    it('should have ball count reset when ball button is pressed after 3 balls', () => {
+        const { getByTestId } = render(<Display />);
+        const balls = getByTestId('ball-count');
+        const ballBtn = getByTestId('ball-btn');
+
+        fireEvent.click(ballBtn);
+        fireEvent.click(ballBtn);
+        fireEvent.click(ballBtn);
+        fireEvent.click(ballBtn);
+
+        expect(balls).toHaveTextContent(0);
+    })
 })
