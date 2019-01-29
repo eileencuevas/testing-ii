@@ -31,7 +31,7 @@ describe('Display Tests', () => {
 
     })
 
-    it('should reset when strike button is pressed 4 times', () => {
+    it('should reset when strike button is pressed 3 times', () => {
         const { getByTestId } = render(<Display />);
         const strikes = getByTestId('strike-count');
         const strikeBtn = getByTestId('strike-btn');
@@ -41,6 +41,44 @@ describe('Display Tests', () => {
         fireEvent.click(strikeBtn);
 
         expect(strikes).toHaveTextContent(0);
+
+    })
+
+    it('should increment outs when strike button is pressed 3 times', () => {
+        const { getByTestId } = render(<Display />);
+        const outs = getByTestId('out-count');
+        const inning = getByTestId('inning-count');
+        const strikeBtn = getByTestId('strike-btn');
+
+        fireEvent.click(strikeBtn);
+        fireEvent.click(strikeBtn);
+        fireEvent.click(strikeBtn);
+
+        expect(outs).toHaveTextContent(1);
+    })
+
+    it('should change from top of inning to bottom when 3 outs are acquired', () => {
+        const { getByTestId } = render(<Display />);
+        const inning = getByTestId('inning-count');
+        const strikeBtn = getByTestId('strike-btn');
+
+        for (let i = 1; i < 10; i++) {
+            fireEvent.click(strikeBtn);
+        }
+
+        expect(inning).toHaveTextContent('bottom of the 1');
+    })
+
+    it('should increment innings when 3 outs are acquired for both teams', () => {
+        const { getByTestId } = render(<Display />);
+        const inning = getByTestId('inning-count');
+        const strikeBtn = getByTestId('strike-btn');
+
+        for (let i = 1; i < 20; i++) {
+            fireEvent.click(strikeBtn);
+        }
+
+        expect(inning).toHaveTextContent('top of the 2');
 
     })
 
